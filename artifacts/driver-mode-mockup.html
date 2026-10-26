@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Макет режиму водія — Таксі в Ладижині</title>
+<style>
+:root{
+  --bg:#F4F1EA; --bg2:#EDE8DC;
+  --ink:#16262A; --muted:#5C6B6E;
+  --surface:#FFFFFF;
+  --accent:#F2A93B; --accent-deep:#C97A1B;
+  --teal:#1E4A4A;
+  --line:#DCD5C4;
+  --radius:20px;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12181A; --bg2:#182022;
+    --ink:#EDEAE2; --muted:#9FADAF;
+    --surface:#1E2729;
+    --line:#2C3638;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12181A; --bg2:#182022;
+  --ink:#EDEAE2; --muted:#9FADAF;
+  --surface:#1E2729;
+  --line:#2C3638;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  padding:40px 24px 64px;
+}
+.wrap{max-width:1180px; margin:0 auto;}
+header.page{margin-bottom:36px;}
+header.page h1{font-size:26px; margin:0 0 8px; font-weight:700;}
+header.page p{margin:0; color:var(--muted); font-size:15px; max-width:640px; line-height:1.5;}
+.row{display:flex; gap:28px; flex-wrap:wrap; align-items:flex-start;}
+.phone-block{flex:0 0 auto;}
+.phone-label{font-size:13px; color:var(--muted); margin:0 0 10px 6px; font-weight:600;}
+.phone{
+  width:300px; height:620px; background:var(--surface);
+  border-radius:36px; border:8px solid var(--ink);
+  overflow:hidden; position:relative;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+.screen{position:absolute; inset:0; display:flex; flex-direction:column; overflow:hidden;}
+
+/* ---- Screen 1: Home ---- */
+.map{
+  flex:1; position:relative; background:
+    linear-gradient(135deg, var(--teal) 0%, #123333 100%);
+}
+.map svg{position:absolute; inset:0; width:100%; height:100%; opacity:.35;}
+.pin{
+  position:absolute; top:44%; left:50%; transform:translate(-50%,-100%);
+  width:14px; height:14px; background:var(--accent); border-radius:50% 50% 50% 0;
+  transform-origin:bottom center; box-shadow:0 0 0 6px rgba(242,169,59,.25);
+}
+.pin::after{content:"";}
+.map-svg{position:absolute; inset:0; width:100%; height:100%;}
+.start-dot{
+  position:absolute; bottom:34px; left:50%; transform:translate(-50%,0);
+  width:12px; height:12px; border-radius:50%; background:#fff;
+  box-shadow:0 0 0 4px rgba(255,255,255,.25);
+}
+.car-marker{
+  position:absolute; bottom:150px; left:47%; transform:translate(-50%,0);
+  width:26px; height:26px; border-radius:50%; background:var(--accent);
+  display:flex; align-items:center; justify-content:center; font-size:14px;
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.field-group{margin-bottom:16px;}
+.field-label{font-size:13px; color:var(--muted); margin-bottom:6px; display:block; font-weight:600;}
+.field-input{
+  width:100%; padding:14px 16px; border:1px solid var(--line); border-radius:14px;
+  font-size:16px; background:var(--bg2); color:var(--ink);
+}
+.profile-body{padding:20px 18px;}
+.place-row{display:flex; align-items:center; gap:12px; padding:13px 8px; border-bottom:1px solid var(--line); font-size:15px;}
+.place-icon{
+  width:36px; height:36px; border-radius:10px; background:var(--bg2);
+  display:flex; align-items:center; justify-content:center; font-size:16px; flex:0 0 auto;
+}
+.places-list{padding:4px 18px 8px; overflow-y:auto; flex:1;}
+.favorites{display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;}
+.fav-chip{
+  display:flex; align-items:center; gap:6px; padding:9px 13px;
+  background:var(--bg2); border:1px solid var(--line); border-radius:100px;
+  font-size:13px; color:var(--ink); font-weight:600;
+}
+.fav-chip.selected{border-color:var(--accent-deep); background:rgba(242,169,59,.16);}
+.fav-label{font-size:12px; color:var(--muted); margin:2px 0 8px; font-weight:600;}
+.top-bar{display:flex; align-items:center; gap:10px; padding:16px 18px; position:absolute; top:0; left:0; right:0;}
+.avatar{width:36px; height:36px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--ink); font-size:17px; text-decoration:none; cursor:pointer;}
+.greeting{color:#fff; font-size:13px; opacity:.85;}
+.sheet{
+  background:var(--surface); border-radius:24px 24px 0 0; padding:20px 18px 22px;
+  box-shadow:0 -8px 24px rgba(0,0,0,.08);
+}
+.sheet h2{font-size:19px; margin:0 0 14px;}
+.search-field{
+  display:flex; align-items:center; gap:10px; background:var(--bg2);
+  border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-bottom:10px;
+}
+.dot{width:9px; height:9px; border-radius:50%; flex:0 0 auto;}
+.dot.a{background:var(--teal);}
+.dot.b{background:var(--accent-deep);}
+.search-field span{font-size:15px; color:var(--ink);}
+.search-field.muted span{color:var(--muted);}
+.big-btn{
+  width:100%; padding:16px; background:var(--accent); color:var(--ink);
+  border:none; border-radius:14px; font-size:17px; font-weight:700; margin-top:8px;
+}
+
+/* ---- Screen 2: Ride options ---- */
+.header-bar{display:flex; align-items:center; gap:12px; padding:18px; border-bottom:1px solid var(--line);}
+.back-circle{width:34px; height:34px; border-radius:50%; background:var(--bg2); display:flex; align-items:center; justify-content:center; font-size:16px; flex:0 0 auto;}
+.header-bar h2{font-size:17px; margin:0;}
+.route-mini{padding:14px 18px; border-bottom:1px solid var(--line); font-size:14px; color:var(--muted);}
+.route-mini b{color:var(--ink);}
+.options{padding:14px 12px; overflow-y:auto; flex:1;}
+.option{
+  display:flex; align-items:center; gap:14px; padding:14px; border-radius:16px;
+  border:2px solid var(--line); margin-bottom:10px;
+}
+.option.selected{border-color:var(--accent-deep); background:rgba(242,169,59,.10);}
+.option .icon{
+  width:48px; height:48px; border-radius:12px; background:var(--bg2);
+  display:flex; align-items:center; justify-content:center; font-size:22px; flex:0 0 auto;
+}
+.option .info{flex:1;}
+.option .info .name{font-size:16px; font-weight:700; margin-bottom:2px;}
+.option .info .meta{font-size:13px; color:var(--muted);}
+.option .price{font-size:17px; font-weight:700; white-space:nowrap;}
+.bottom-fixed{padding:14px 18px 18px; border-top:1px solid var(--line);}
+.pay-row{display:flex; justify-content:space-between; align-items:center; font-size:14px; color:var(--muted); margin-bottom:10px;}
+.pay-row b{color:var(--ink); font-size:15px;}
+
+/* ---- Screen 3: Trip tracking ---- */
+.driver-card{
+  background:var(--surface); border-radius:24px 24px 0 0; padding:20px 18px 24px;
+  box-shadow:0 -8px 24px rgba(0,0,0,.08);
+}
+.eta-pill{
+  display:inline-block; background:var(--teal); color:#fff; font-size:13px;
+  padding:6px 14px; border-radius:100px; margin-bottom:14px; font-weight:600;
+}
+.driver-row{display:flex; align-items:center; gap:12px; margin-bottom:16px;}
+.driver-photo{width:52px; height:52px; border-radius:50%; background:var(--bg2); flex:0 0 auto; display:flex; align-items:center; justify-content:center; font-size:22px;}
+.driver-info .name{font-size:16px; font-weight:700;}
+.driver-info .car{font-size:13px; color:var(--muted);}
+.plate{
+  margin-left:auto; font-size:14px; font-weight:700; background:var(--bg2);
+  padding:6px 10px; border-radius:8px;
+}
+.action-row{display:flex; gap:10px;}
+.action-row .call,
+.action-row .msg-btn{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:14px 10px; border-radius:14px; font-size:15px; font-weight:700;
+}
+.action-row .call{background:var(--teal); color:#fff; border:none;}
+.action-row .msg-btn{background:var(--surface); color:var(--ink); border:1.5px solid var(--line);}
+.cancel-full{
+  display:flex; align-items:center; justify-content:center;
+  width:100%; padding:14px; margin-top:10px; background:transparent; border:none;
+  color:var(--muted); font-size:15px; font-weight:600;
+}
+.chat-body{flex:1; padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; background:var(--bg2);}
+.msg{max-width:75%; padding:10px 14px; border-radius:16px; font-size:14px; line-height:1.4;}
+.msg.driver{background:var(--surface); border:1px solid var(--line); align-self:flex-start; border-bottom-left-radius:4px;}
+.msg.me{background:var(--accent); color:var(--ink); align-self:flex-end; border-bottom-right-radius:4px;}
+.chat-input-row{display:flex; gap:8px; padding:12px 14px; border-top:1px solid var(--line); background:var(--surface); align-items:center;}
+.quick-replies{display:flex; gap:8px; padding:0 14px 10px; flex-wrap:nowrap; overflow-x:auto;}
+.quick-chip{
+  padding:8px 13px; background:var(--surface); border:1px solid var(--line);
+  border-radius:100px; font-size:13px; color:var(--ink); font-weight:600; white-space:nowrap;
+  flex:0 0 auto;
+}
+.chat-input{flex:1; padding:12px 16px; background:var(--bg2); border-radius:100px; font-size:14px; color:var(--muted);}
+.send-btn{width:40px; height:40px; border-radius:50%; background:var(--teal); color:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; flex:0 0 auto;}
+.chat-header-photo{width:34px; height:34px; border-radius:50%; background:var(--bg2); display:flex; align-items:center; justify-content:center; font-size:16px; flex:0 0 auto;}
+.hero{height:210px; position:relative; overflow:hidden; flex:0 0 auto;}
+.hero-svg{width:100%; height:100%; display:block;}
+.auth-body{flex:1; padding:24px 22px; display:flex; flex-direction:column; background:var(--surface);}
+.auth-body h2{font-size:21px; margin:0 0 6px;}
+.auth-sub{font-size:14px; color:var(--muted); margin:0 0 24px;}
+.google-btn{
+  width:100%; padding:14px; background:var(--surface); border:1.5px solid var(--line);
+  border-radius:14px; font-size:16px; font-weight:700; color:var(--ink); margin-top:10px;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+}
+.g-icon{width:20px; height:20px; border-radius:50%; background:#fff; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#4285F4;}
+.auth-terms{margin-top:auto; font-size:12px; color:var(--muted); text-align:center; line-height:1.5;}
+.otp-row{display:flex; gap:10px; justify-content:center;}
+.otp-box{width:52px; height:60px; border:2px solid var(--line); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; background:var(--bg2);}
+
+.notes{margin-top:44px; max-width:820px;}
+.notes h3{font-size:16px; margin:0 0 10px;}
+.notes ul{margin:0; padding-left:20px; color:var(--muted); font-size:14px; line-height:1.7;}
+@media (max-width:680px){
+  body{padding:28px 14px 48px;}
+  .phone{width:100%; max-width:320px;}
+}
+
+.toggle{width:52px;height:30px;border-radius:100px;background:var(--line);position:relative;flex:0 0 auto}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff}
+.toggle.on{background:#2E8B57}.toggle.on::after{left:25px}
+.seg{display:flex;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:16px}
+.seg div{flex:1;text-align:center;padding:12px 0;border-radius:11px;font-size:15px;font-weight:700;color:var(--muted)}
+.seg .on{background:var(--accent);color:var(--ink)}
+.status-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface);border-radius:16px;padding:12px 14px;box-shadow:0 4px 14px rgba(0,0,0,.18);position:absolute;top:16px;left:16px;right:16px}
+.status-bar b{font-size:16px}.status-bar small{display:block;font-size:12px;color:var(--muted)}
+.stats{display:flex;gap:10px;margin-bottom:14px}
+.stat{flex:1;background:var(--bg2);border-radius:14px;padding:12px}
+.stat b{display:block;font-size:20px}.stat span{font-size:12px;color:var(--muted)}
+.btn-row{display:flex;gap:10px;margin-top:8px}
+.btn-row .big-btn{margin-top:0}
+.btn-ghost{width:100%;padding:16px;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;font-size:17px;font-weight:700;color:var(--ink)}
+.btn-green{width:100%;padding:16px;background:#2E8B57;color:#fff;border:none;border-radius:14px;font-size:17px;font-weight:700;margin-top:8px}
+.timer{width:64px;height:64px;border-radius:50%;border:5px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex:0 0 auto}
+.order-price{font-size:30px;font-weight:800}
+.route-line{display:flex;gap:12px;margin:10px 0}
+.route-line .dots{display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:5px}
+.route-line .dots i{width:2px;height:22px;background:var(--line)}
+.route-line .t{font-size:15px;line-height:1.3}.route-line .t small{display:block;color:var(--muted);font-size:12px}
+.tag{display:inline-block;background:var(--bg2);border-radius:100px;padding:5px 12px;font-size:13px;font-weight:700;margin-right:6px}
+.warn{background:rgba(242,169,59,.16);border:1px solid var(--accent-deep);border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.4;margin-bottom:12px}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px}
+.center .emoji{font-size:54px;margin-bottom:14px}.center h2{font-size:21px;margin:0 0 8px}.center p{font-size:14px;color:var(--muted);line-height:1.5;margin:0}
+.seg-sm{display:flex;gap:8px;margin-bottom:16px}
+.seg-sm div{flex:1;text-align:center;padding:14px 6px;border:2px solid var(--line);border-radius:14px;font-size:15px;font-weight:700}
+.seg-sm .on{border-color:var(--accent-deep);background:rgba(242,169,59,.12)}
+.sum-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.group-title{font-size:16px;margin:30px 0 14px;color:var(--muted)}
+
+</style></head><body><div class="wrap">
+<header class="page"><h1>Макет режиму водія</h1><p>Режим «Водій» у тому ж застосунку: вихід на лінію, замовлення з розсилки, поїздка, підсумок і обмеження виходу на лінію, а також нові стани пасажира. Android-перша версія, оплата готівкою.</p></header>
+<h3 class="group-title" style="margin-top:0">Зміни в пасажирській частині</h3><div class="row"><div class="phone-block"><p class="phone-label">П1. Налаштування: вибір ролі</p><div class="phone"><div class="screen"><div class="header-bar"><div class="back-circle">←</div><h2>Налаштування</h2></div><div class="profile-body"><div class="seg"><div>Пасажир</div><div class="on">Водій</div></div>
+<div class="field-group"><label class="field-label">Ім'я та прізвище</label><div class="field-input">Іван Петренко</div></div>
+<div class="field-group"><label class="field-label">Номер телефону</label><div class="field-input">+380 67 123 45 67</div></div>
+<div class="place-row" style="margin-bottom:12px"><div class="place-icon">🕘</div> Історія поїздок <span style="margin-left:auto;color:var(--muted)">›</span></div><button class="big-btn">Зберегти зміни</button><div style="text-align:center;margin-top:16px;font-size:14px;color:var(--accent-deep);font-weight:700">Написати в підтримку (Telegram)</div></div></div></div></div><div class="phone-block"><p class="phone-label">П2. Мало машин на лінії (пасажир)</p><div class="phone"><div class="screen"><div class="header-bar"><div class="back-circle">←</div><h2>Оберіть тариф</h2></div><div class="route-mini">Від <b>вул. Соборна, 12</b> до <b>вокзалу</b> · 6,4 км</div>
+<div class="options"><div class="warn">🚕 По місту мало вільних машин, тому час очікування може бути більшим.</div>
+<div class="option selected"><div class="icon">🚗</div><div class="info"><div class="name">Стандарт</div><div class="meta">до 4 місць</div></div><div class="price">115 ₴</div></div>
+<div class="option"><div class="icon">🚐</div><div class="info"><div class="name">Бус</div><div class="meta">до 8 місць</div></div><div class="price">230 ₴</div></div></div>
+<div class="bottom-fixed"><div class="pay-row"><span>Оплата</span><b>Готівка</b></div><button class="big-btn">Замовити за 115 ₴</button></div></div></div></div></div>
+<h3 class="group-title">Пасажир: пошук, скасування, оцінка, історія (нові стани)</h3><div class="row"><div class="phone-block"><p class="phone-label">П3. Шукаємо водія</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/></svg><div style="position:absolute;top:36%;left:50%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;background:rgba(242,169,59,.14);border:2px solid rgba(242,169,59,.5);display:flex;align-items:center;justify-content:center"><div style="width:72px;height:72px;border-radius:50%;background:rgba(242,169,59,.28);display:flex;align-items:center;justify-content:center;font-size:30px">🚕</div></div></div><div class="driver-card"><span class="eta-pill">Шукаємо водія… 0:25</span><h2 style="font-size:19px;margin:0 0 4px">Надсилаємо замовлення водіям поруч</h2><p style="font-size:14px;color:var(--muted);margin:0 0 6px">Перший, хто прийме, поїде до вас</p><div class="route-line"><div class="dots"><span class="dot a"></span><i></i><span class="dot b"></span></div><div class="t">вул. Соборна, 12<div style="height:8px"></div>Вокзал<small>6,4 км · Стандарт · 115 ₴ готівкою</small></div></div><button class="btn-ghost">Скасувати пошук</button></div></div></div></div><div class="phone-block"><p class="phone-label">П4. Водіїв немає</p><div class="phone"><div class="screen"><div class="center"><div class="emoji">😕</div><h2>Поки ніхто не прийняв замовлення</h2><p>Вільних водіїв поруч зараз мало. Спробуйте ще раз або змініть тариф.</p></div><div class="bottom-fixed"><button class="big-btn" style="margin-top:0">Спробувати ще раз</button><button class="btn-ghost" style="margin-top:10px">Обрати інший тариф</button><button class="cancel-full">Скасувати</button></div></div></div></div><div class="phone-block"><p class="phone-label">П5. Водій скасував поїздку</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/></svg><div class="top-bar"></div></div><div class="driver-card"><span class="eta-pill" style="background:var(--accent-deep)">Водій скасував поїздку</span><h2 style="font-size:19px;margin:0 0 4px">Шукаємо вам іншого водія</h2><p style="font-size:14px;color:var(--muted);margin:0 0 6px">Замовлення знову надіслано водіям поруч. Нічого робити не треба.</p><div class="route-line"><div class="dots"><span class="dot a"></span><i></i><span class="dot b"></span></div><div class="t">вул. Соборна, 12<div style="height:8px"></div>Вокзал<small>6,4 км · Стандарт · 115 ₴ готівкою</small></div></div><button class="btn-ghost">Скасувати замовлення</button></div></div></div></div><div class="phone-block"><p class="phone-label">П6. Пасажир скасовує, водій їде</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><path d="M150 300 C 138 250, 162 210, 150 158" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" fill="none"/></svg><div class="car-marker">🚗</div><div class="pin"></div></div><div style="position:absolute;inset:0;background:rgba(0,0,0,.5)"></div><div class="sheet" style="position:absolute;left:0;right:0;bottom:0"><h2>Скасувати поїздку?</h2><p style="font-size:14px;color:var(--muted);line-height:1.5;margin:0 0 12px">Водій Олександр уже їде до вас, він буде через 3 хв.</p><label class="field-label">Причина</label><div class="favorites"><div class="fav-chip selected">Передумав(ла)</div><div class="fav-chip">Довго чекати</div><div class="fav-chip">Помилився(лась) адресою</div></div><button class="big-btn" style="margin-top:0">Залишити поїздку</button><button class="cancel-full" style="color:#C0392B">Так, скасувати</button></div></div></div></div><div class="phone-block"><p class="phone-label">П7. Поїздку завершено й оцінка</p><div class="phone"><div class="screen"><div class="header-bar"><div class="back-circle">✕</div><h2>Ви приїхали</h2></div><div class="auth-body" style="padding-top:18px"><div style="text-align:center;margin-bottom:12px"><div style="font-size:14px;color:var(--muted)">До сплати водієві</div><div class="order-price" style="font-size:38px">115 ₴</div><div style="font-size:14px;color:var(--muted)">готівкою</div></div><div style="text-align:center;font-size:17px;font-weight:700;margin:6px 0">Як пройшла ваша поїздка?</div><div style="text-align:center;margin-bottom:14px"><span style="font-size:38px;color:var(--accent)">★</span><span style="font-size:38px;color:var(--accent)">★</span><span style="font-size:38px;color:var(--accent)">★</span><span style="font-size:38px;color:var(--accent)">★</span><span style="font-size:38px;color:var(--accent)">★</span></div><div class="field-input" style="color:var(--muted);font-size:14px;height:84px">Залиште коментар (необовʼязково)</div><button class="big-btn">Готово</button></div></div></div></div><div class="phone-block"><p class="phone-label">П8. Історія поїздок</p><div class="phone"><div class="screen"><div class="header-bar"><div class="back-circle">←</div><h2>Історія поїздок</h2></div><div class="profile-body" style="padding-top:8px"><div class="sum-row" style="flex-direction:column;gap:2px"><div style="display:flex;justify-content:space-between"><b>Соборна → Вокзал</b><b>115 ₴</b></div><span style="font-size:13px;color:var(--muted)">22 жовт., 14:30 · Олександр · 5 ★</span></div><div class="sum-row" style="flex-direction:column;gap:2px"><div style="display:flex;justify-content:space-between"><b>ТЕС → Лікарня</b><b>90 ₴</b></div><span style="font-size:13px;color:var(--muted)">20 жовт., 09:10 · Андрій · 4 ★</span></div><div class="sum-row" style="flex-direction:column;gap:2px"><div style="display:flex;justify-content:space-between"><b>Комора → Ковчег</b><b style="color:var(--muted)">Скасовано</b></div><span style="font-size:13px;color:var(--muted)">18 жовт., 21:45</span></div><button class="btn-ghost" style="margin-top:16px">Повторити останню поїздку</button></div></div></div></div><div class="phone-block"><p class="phone-label">П9. Push: водій на місці</p><div class="phone"><div class="screen"><div style="flex:1;background:linear-gradient(160deg,#1E4A4A,#0f1d1e);padding:50px 14px 14px;color:#fff"><div style="text-align:center;margin-bottom:34px"><div style="font-size:54px;font-weight:300">14:32</div><div style="font-size:14px;opacity:.8">четвер, 22 жовтня</div></div><div style="background:rgba(255,255,255,.18);border-radius:18px;padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;font-size:12px;opacity:.85;margin-bottom:6px"><span style="background:var(--accent);border-radius:6px;padding:1px 5px">🚕</span>ТАКСІ В ЛАДИЖИНІ<span style="margin-left:auto">зараз</span></div><div style="font-size:15px;font-weight:700;margin-bottom:3px">Водій на місці</div><div style="font-size:14px;line-height:1.4">Олександр · Skoda Octavia, сірий<br><b>АХ 4521 ІК</b></div></div></div></div></div></div><div class="phone-block"><p class="phone-label">П10. Водій на місці (у застосунку)</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/></svg><div class="start-dot"></div><div class="car-marker" style="bottom:46px">🚗</div></div><div class="driver-card"><span class="eta-pill" style="background:#2E8B57">Водій на місці, чекає до 5 хв</span><div class="driver-row"><div class="driver-photo">🙂</div><div class="driver-info"><div class="name">Олександр, 4.9 ★</div><div class="car">Skoda Octavia, сірий</div></div><div class="plate">АХ 4521 ІК</div></div><div class="action-row"><button class="msg-btn">Подзвонити</button><button class="call">Написати</button></div><button class="cancel-full">Скасувати поїздку</button></div></div></div></div></div>
+<h3 class="group-title">Екрани водія</h3><div class="row"><div class="phone-block"><p class="phone-label">В1. Реєстрація водія</p><div class="phone"><div class="screen"><div class="header-bar"><div class="back-circle">←</div><h2>Стати водієм</h2></div><div class="profile-body"><p style="font-size:14px;color:var(--muted);margin:0 0 16px;line-height:1.5">Пасажири бачитимуть дані вашого авто, щоб вас впізнати.</p>
+<label class="field-label">Тип авто</label><div class="seg-sm"><div class="on">🚗 Авто</div><div>🚐 Бус</div></div>
+<div class="field-group"><label class="field-label">Марка і модель</label><div class="field-input">Skoda Octavia</div></div>
+<div class="field-group"><label class="field-label">Колір</label><div class="field-input">Сірий</div></div>
+<div class="field-group"><label class="field-label">Номерний знак</label><div class="field-input">АХ 4521 ІК</div></div>
+<button class="big-btn">Зберегти й почати</button></div></div></div></div><div class="phone-block"><p class="phone-label">В2. Головний: не на лінії</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/></svg><div class="status-bar"><div><b>Ви не на лінії</b><small>Замовлення не надходять</small></div><div class="toggle"></div></div><div class="car-marker">🚗</div></div><div class="sheet"><div class="stats"><div class="stat"><b>0</b><span>поїздок сьогодні</span></div><div class="stat"><b>0 ₴</b><span>заробіток</span></div></div>
+<button class="big-btn" style="margin-top:0">Вийти на лінію</button></div></div></div></div><div class="phone-block"><p class="phone-label">В3. Головний: на лінії</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/></svg><div class="status-bar"><div><b style="color:#2E8B57">Ви на лінії</b><small>Чекаємо замовлення…</small></div><div class="toggle on"></div></div><div class="car-marker">🚗</div></div><div class="sheet"><div class="stats"><div class="stat"><b>3</b><span>поїздки сьогодні</span></div><div class="stat"><b>560 ₴</b><span>заробіток</span></div></div>
+<button class="btn-ghost">Зійти з лінії</button></div></div></div></div><div class="phone-block"><p class="phone-label">В4. Нове замовлення</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><path d="M150 300 C 138 250, 162 210, 150 158" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" fill="none"/></svg></div><div class="driver-card"><div style="display:flex;justify-content:space-between;align-items:center"><div><span class="tag">🚗 Стандарт</span><span class="tag">Готівка</span></div><div class="timer" style="width:48px;height:48px;font-size:17px;border-width:4px">15</div></div>
+<div class="order-price" style="margin-top:10px">115 ₴</div>
+<div class="route-line"><div class="dots"><span class="dot a"></span><i></i><span class="dot b"></span></div><div class="t">вул. Соборна, 12<small>до клієнта 1,2 км · 4 хв</small><div style="height:8px"></div>Вокзал<small>поїздка 6,4 км</small></div></div>
+<div class="btn-row"><button class="btn-ghost" style="flex:1">Пропустити</button><button class="big-btn" style="flex:1.4">Прийняти</button></div></div></div></div></div><div class="phone-block"><p class="phone-label">В5. Замовлення вже взяли</p><div class="phone"><div class="screen"><div class="center"><div class="emoji">🏁</div><h2>Це замовлення вже взяв інший водій</h2><p>Нічого страшного. Це не рахується як відхилення. Чекайте наступне.</p></div><div class="bottom-fixed"><button class="big-btn" style="margin-top:0">Зрозуміло</button></div></div></div></div><div class="phone-block"><p class="phone-label">В6. Їду до клієнта</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><path d="M150 300 C 138 250, 162 210, 150 158" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" fill="none"/></svg><div class="top-bar"></div><div class="start-dot"></div><div class="car-marker">🚗</div><div class="pin"></div></div><div class="driver-card"><span class="eta-pill">До клієнта 3 хв · 1,2 км</span>
+<div class="driver-row"><div class="driver-photo">🙂</div><div class="driver-info"><div class="name">Іван</div><div class="car">вул. Соборна, 12</div></div></div>
+<div class="action-row"><button class="msg-btn">Подзвонити</button><button class="call">Написати</button></div>
+<button class="big-btn">Я на місці</button><button class="cancel-full">Скасувати замовлення</button></div></div></div></div><div class="phone-block"><p class="phone-label">В6а. Чекаю на пасажира</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/></svg><div class="start-dot"></div><div class="car-marker" style="bottom:46px">🚗</div></div><div class="driver-card"><span class="eta-pill" style="background:#2E8B57">Чекаємо пасажира · ще 2:50 з 5:00</span><div class="driver-row"><div class="driver-photo">🙂</div><div class="driver-info"><div class="name">Іван</div><div class="car">вул. Соборна, 12 → Вокзал</div></div></div><div class="action-row"><button class="msg-btn">Подзвонити</button><button class="call">Написати</button></div><button class="big-btn">Почати поїздку</button><button class="cancel-full" style="opacity:.55">Пасажир не вийшов (доступно через 2:50)</button></div></div></div></div><div class="phone-block"><p class="phone-label">В7. Поїздка</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><path d="M150 300 C 138 250, 162 210, 150 158" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" fill="none"/></svg><div class="car-marker">🚗</div><div class="pin"></div></div><div class="driver-card"><span class="eta-pill">До місця призначення 9 хв</span>
+<div class="route-line"><div class="dots"><span class="dot a"></span><i></i><span class="dot b"></span></div><div class="t">вул. Соборна, 12<div style="height:8px"></div>Вокзал<small>6,4 км · 115 ₴ готівкою</small></div></div>
+<button class="big-btn">Завершити поїздку</button></div></div></div></div><div class="phone-block"><p class="phone-label">В8. Підсумок поїздки</p><div class="phone"><div class="screen"><div class="header-bar"><div class="back-circle">✕</div><h2>Поїздку завершено</h2></div><div class="auth-body" style="padding-top:20px"><div style="text-align:center;margin-bottom:18px"><div style="font-size:14px;color:var(--muted)">Отримайте від клієнта</div><div class="order-price" style="font-size:42px">115 ₴</div><div style="font-size:14px;color:var(--muted)">готівкою</div></div>
+<div class="sum-row"><span>Відстань</span><b>6,4 км</b></div><div class="sum-row"><span>Час у дорозі</span><b>14 хв</b></div><div class="sum-row"><span>Сьогодні заробили</span><b>675 ₴</b></div>
+<button class="big-btn" style="margin-top:20px">Готово</button></div></div></div></div><div class="phone-block"><p class="phone-label">В9. Історія та заробіток</p><div class="phone"><div class="screen"><div class="header-bar"><div class="back-circle">←</div><h2>Мій заробіток</h2></div><div class="profile-body" style="padding-top:14px"><div class="stats"><div class="stat"><b>675 ₴</b><span>сьогодні</span></div><div class="stat"><b>14</b><span>поїздок за місяць</span></div></div>
+<div class="sum-row"><span>Соборна → Вокзал</span><b>115 ₴</b></div><div class="sum-row"><span>ТЕС → Лікарня</span><b>90 ₴</b></div><div class="sum-row"><span>Комора → Ковчег</span><b>230 ₴</b></div><div class="sum-row"><span>Караван → ГЕС</span><b>120 ₴</b></div></div></div></div></div><div class="phone-block"><p class="phone-label">В10. Вихід на лінію вимкнено</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/></svg><div class="status-bar"><div><b>Ви не на лінії</b><small>Вихід на лінію недоступний</small></div><div class="toggle" style="opacity:.4"></div></div><div class="car-marker">🚗</div></div><div class="sheet"><div class="stats"><div class="stat"><b>0</b><span>поїздок сьогодні</span></div><div class="stat"><b>0 ₴</b><span>заробіток</span></div></div><div style="display:flex;gap:10px;align-items:center"><button class="big-btn" style="margin-top:0;background:var(--line);color:var(--muted);flex:1" disabled>Вийти на лінію</button><div class="back-circle" style="width:48px;height:48px;font-size:20px;font-weight:800;border:2px solid var(--accent-deep);color:var(--accent-deep);flex:0 0 auto">i</div></div></div></div></div></div><div class="phone-block"><p class="phone-label">В11. Підказка після натискання «i»</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/></svg><div class="status-bar"><div><b>Ви не на лінії</b><small>Вихід на лінію недоступний</small></div><div class="toggle" style="opacity:.4"></div></div><div class="car-marker">🚗</div></div><div class="sheet"><div class="stats"><div class="stat"><b>0</b><span>поїздок сьогодні</span></div><div class="stat"><b>0 ₴</b><span>заробіток</span></div></div><div style="display:flex;gap:10px;align-items:center"><button class="big-btn" style="margin-top:0;background:var(--line);color:var(--muted);flex:1" disabled>Вийти на лінію</button><div class="back-circle" style="width:48px;height:48px;font-size:20px;font-weight:800;border:2px solid var(--accent-deep);color:var(--accent-deep);flex:0 0 auto">i</div></div></div><div style="position:absolute;inset:0;background:rgba(0,0,0,.45)"></div><div class="sheet" style="position:absolute;left:0;right:0;bottom:0"><h2>Вихід на лінію тимчасово недоступний</h2><p style="font-size:15px;line-height:1.5;color:var(--muted);margin:0 0 14px">Ви скасували багато замовлень, тому вихід на лінію тимчасово недоступний. Для вирішення напишіть у підтримку.</p><button class="big-btn" style="margin-top:0">Написати в Telegram</button><button class="cancel-full">Закрити</button></div></div></div></div></div><div class="phone-block"><p class="phone-label">В13. Пасажир скасував замовлення</p><div class="phone"><div class="screen"><div class="center"><div class="emoji">🙅</div><h2>Пасажир скасував замовлення</h2><p>Причина: передумав. Це не рахується як ваше відхилення. Можна знову виходити на лінію.</p></div><div class="bottom-fixed"><button class="big-btn" style="margin-top:0">Повернутися на лінію</button></div></div></div></div><div class="phone-block"><p class="phone-label">В12. Водій скасовує після «Прийняти»</p><div class="phone"><div class="screen"><div class="map"><svg class="map-svg" viewBox="0 0 300 360" preserveAspectRatio="none"><line x1="0" y1="90" x2="300" y2="90" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="0" y1="230" x2="300" y2="215" stroke="rgba(255,255,255,.16)" stroke-width="10"/><line x1="65" y1="0" x2="95" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><line x1="215" y1="0" x2="185" y2="360" stroke="rgba(255,255,255,.12)" stroke-width="8"/><path d="M150 300 C 138 250, 162 210, 150 158" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" fill="none"/></svg><div class="car-marker">🚗</div><div class="pin"></div></div><div style="position:absolute;inset:0;background:rgba(0,0,0,.5)"></div><div class="sheet" style="position:absolute;left:0;right:0;bottom:0"><h2>Скасувати замовлення?</h2><div class="warn" style="margin:0 0 12px">⚠️ Це буде зараховано як відхилення: <b>2 із 3</b> за цей місяць. Після 3-го вихід на лінію буде тимчасово недоступний.</div><label class="field-label">Причина</label><div class="favorites"><div class="fav-chip selected">Проблема з авто</div><div class="fav-chip">Клієнт не відповідає</div><div class="fav-chip">Інше</div></div><button class="big-btn" style="margin-top:0">Продовжити поїздку</button><button class="cancel-full" style="color:#C0392B">Скасувати замовлення</button></div></div></div></div></div>
+<div class="notes"><h3>Що закладено</h3><ul>
+<li>Режим водія живе в тому самому застосунку: перемикач «Пасажир / Водій» у налаштуваннях (П1). Пасажир його не бачить, поки не ввімкне.</li>
+<li>Реєстрація вільна: телефон і SMS-код (екрани 7–8 пасажирського макета), далі лише дані авто (В1).</li>
+<li>Замовлення приходить усім водіям на лінії (В4). Хто першим натисне «Прийняти», той і бере; решта бачить В5.</li>
+<li>«Пропустити» не рахується відхиленням. Відхилення: прийняв і скасував або не приїхав. 3 за місяць = кнопку «Вийти на лінію» вимкнено (В10), поруч «i» з поясненням (В11), розблокування через Telegram. Акаунт і решта функцій працюють.</li>
+<li>Готівка: на підсумку (В8) чітко показано суму, яку треба отримати.</li>
+<li>Якщо на лінії менше 2 авто, пасажир бачить попередження про довше очікування (П2).</li>
+<li>Нові стани пасажира: пошук водія (П3), водіїв немає (П4), водій скасував — пошук іншого автоматично (П5), скасування пасажиром (П6), підсумок і проста оцінка: «Як пройшла ваша поїздка?», 5 зірок і коментар (П7), push «Водій на місці» з іменем, авто та номером (П9) і відповідний стан у застосунку (П10), історія з «Повторити поїздку» (П8, вхід з налаштувань).</li>
+<li>Для водія: «Я на місці» (В6) → «Чекаю на пасажира» (В6а) з таймером 5 хв і кнопкою «Почати поїздку» → поїздка (В7). Через 5 хв стає доступною кнопка «Пасажир не вийшов».</li>
+<li>Припущення до п. вище: після «Пасажир не вийшов» замовлення скасовується без відхилення для водія, а пасажир бачить сповіщення. Потребує підтвердження. Якщо пасажир скасував, водій бачить В13 і не отримує відхилення.</li>
+<li>Скасування водієм після «Прийняти» (В12) показує лічильник відхилень і попереджає про наслідок.</li>
+<li>Припущення для підтвердження: пошук триває ~2 хв до П4; скасування безкоштовне (MVP без комісій і штрафів); оцінка 1–5 зірок і коментар, без тегів; історія зберігає скасовані поїздки.</li>
+<li>Стиль, великі кнопки й палітра ті самі, що в пасажирському макеті. Таймер на В4 (15 с) і тексти попереджень — припущення, потребують підтвердження.</li></ul></div></div></body></html>
